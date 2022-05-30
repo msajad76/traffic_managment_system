@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 class Owner(models.Model):
     name = models.CharField(max_length=50)
     national_code = models.CharField(
-        max_length=10, validators=[MinLengthValidator(10)])
+        max_length=10, validators=[MinLengthValidator(10)], unique=True)
     age = models.PositiveSmallIntegerField()
     total_toll_paid = models.DecimalField(max_digits=11, decimal_places=0)
 
@@ -27,7 +27,7 @@ class Vehicle(models.Model):
     vehicle_type = models.CharField(
         "type", max_length=1, choices=VehicleType.choices)
     color = models.CharField(max_length=10)
-    lenght = models.DecimalField(max_digits=3, decimal_places=1)
+    length = models.DecimalField(max_digits=3, decimal_places=1)
     load_valume = models.DecimalField(
         max_digits=4, decimal_places=1, null=True, blank=True)
 
@@ -38,7 +38,7 @@ class Vehicle(models.Model):
         ]
 
     def __str__(self) -> str:
-        return f'{self.owner}, {self.get_vehicle_type_display()}, {self.color}'
+        return f'{self.id}, {self.owner}, {self.get_vehicle_type_display()}, {self.color}'
 
 
 class TollStation(models.Model):
@@ -46,15 +46,19 @@ class TollStation(models.Model):
     toll_per_cross = models.DecimalField(max_digits=11, decimal_places=0)
     location = gis_models.PointField()
 
+    def __str__(self) -> str:
+        return f'{self.name} at {self.location}'
+
 
 class Road(models.Model):
-    name = models.CharField(max_length=100, null=True, blank=True, default='unknown')
+    name = models.CharField(max_length=100, null=True,
+                            blank=True, default='unknown')
     width = models.DecimalField(max_digits=18, decimal_places=15)
     geom = gis_models.MultiLineStringField()
 
     class Meta:
         unique_together = [['name', 'width']]
-
+        ordering = ['id']
     def __str__(self) -> str:
         return f'{self.name, self.width}'
 
@@ -64,5 +68,7 @@ class Node(models.Model):
     location = gis_models.PointField()
     date = models.DateTimeField(default=timezone.now)
 
+    class Meta:
+        ordering = ['car', 'date']
     def __str__(self) -> str:
-        return f'{self.car} at {self.date}'
+        return f'{self.id} {self.car} at {self.date} in {self.location}'

@@ -1,0 +1,169 @@
+{
+	"info": {
+		"_postman_id": "cabcd61d-adc2-451b-adba-21cb931b5fa4",
+		"name": "traffic_management",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get All Vehicle",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/car/?color=RED,blue",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"car",
+						""
+					],
+					"query": [
+						{
+							"key": "min_age",
+							"value": "60",
+							"disabled": true
+						},
+						{
+							"key": "color",
+							"value": "RED,blue"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Vehicle",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"vehicle_type\": \"\",\n    \"color\": \"\",\n    \"length\": \"\",\n    \"owner\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/car/",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"car",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Owner",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/owner/",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"owner",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Owner",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/owner/",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"owner",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Vehicle Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{HOST}}/car/status/?vehicle_type=S&toll_station=عوراضی 1&distance=10000",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"car",
+						"status",
+						""
+					],
+					"query": [
+						{
+							"key": "vehicle_type",
+							"value": "S"
+						},
+						{
+							"key": "toll_station",
+							"value": "عوراضی 1"
+						},
+						{
+							"key": "distance",
+							"value": "10000"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "HOST",
+			"value": "http://127.0.0.1:8000"
+		}
+	]
+}
