@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-u6$^bang(^je43v=h1q^xx-l_&+13ye#(%o$c6%5&yj1jfb@tq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -77,15 +77,15 @@ WSGI_APPLICATION = 'traffic_managment_system.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
+import os
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'testgis',
-        'USER': 'postgres',
-        'PASSWORD': '12345',
-        'HOST': 'localhost',
-        'PORT': '5432'
+        'NAME': os.environ.get('POSTGRES_DB', 'testgis'),
+        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', '12345'),
+        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432')
     }
 }
 

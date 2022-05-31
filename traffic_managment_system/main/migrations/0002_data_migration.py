@@ -34,7 +34,7 @@ def load_owner_and_car_data(apps, schema_editor):
                     vehicle_type = VehicleType.SMALL.value
 
                 Vehicle.objects.create(id=int(car.get('id')), owner=owner, vehicle_type=vehicle_type, color=car.get(
-                    'color'), lenght=car.get('length'), load_valume=car.get('load_valume'))
+                    'color'), length=car.get('length'), load_valume=car.get('load_valume'))
                 
 
 
